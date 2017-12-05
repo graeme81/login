@@ -1,0 +1,147 @@
+package com.work.login;
+import java.awt.Component;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
+import java.awt.Font;
+import javax.swing.JButton;
+import javax.swing.JTextField;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+
+import com.work.login.entity.User;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+public class LogInScreen {
+
+	JFrame frmLogin;
+	private JTextField txtUsername;
+	private JTextField txtPassword;
+
+	// Launch the application //
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					LogInScreen window = new LogInScreen();
+					window.frmLogin.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	// Create the application //
+	
+	public LogInScreen() {
+		
+//		SessionFactory factory = new Configuration()
+//								.configure("hibernate.cfg.xml")
+//								.addAnnotatedClass(User.class)
+//								.buildSessionFactory();
+//				
+//			
+//				Session session = factory.getCurrentSession();
+		initialize();
+	}
+
+	//  Initialize the contents of the frame //
+	 
+	private void initialize() {
+		frmLogin = new JFrame();
+			frmLogin.getContentPane().setFont(new Font("Segoe UI Emoji", Font.PLAIN, 25));
+			frmLogin.setBounds(100, 100, 450, 300);
+			frmLogin.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			frmLogin.getContentPane().setLayout(null);
+		
+		JLabel lblNewLabel = new JLabel("Login");
+			lblNewLabel.setFont(new Font("SimSun", Font.PLAIN, 25));
+			lblNewLabel.setBounds(174, 11, 92, 43);
+			frmLogin.getContentPane().add(lblNewLabel);
+		
+		JLabel lblUsername = new JLabel("Username:");
+			lblUsername.setFont(new Font("Calibri", Font.PLAIN, 18));
+			lblUsername.setBounds(120, 73, 82, 24);
+			frmLogin.getContentPane().add(lblUsername);
+		
+		JLabel lblPassword = new JLabel("Password:");
+			lblPassword.setFont(new Font("Calibri", Font.PLAIN, 18));
+			lblPassword.setBounds(120, 109, 82, 24);
+			frmLogin.getContentPane().add(lblPassword);
+		
+		txtUsername = new JTextField();
+			txtUsername.setFont(new Font("Calibri", Font.PLAIN, 18));
+			txtUsername.setBounds(223, 72, 140, 24);
+			frmLogin.getContentPane().add(txtUsername);
+			txtUsername.setColumns(10);
+		
+		txtPassword = new JTextField();
+			txtPassword.setFont(new Font("Calibri", Font.PLAIN, 18));
+			txtPassword.setColumns(10);
+			txtPassword.setBounds(223, 110, 140, 24);
+			frmLogin.getContentPane().add(txtPassword);
+		
+		JButton btnClear = new JButton("Clear");
+			btnClear.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					txtUsername.setText("");
+					txtPassword.setText("");
+				}
+			});
+			btnClear.setFont(new Font("Constantia", Font.PLAIN, 16));
+			btnClear.setBounds(26, 176, 110, 43);
+			frmLogin.getContentPane().add(btnClear);
+		
+		JButton btnLogin = new JButton("Login");
+			btnLogin.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					String unIn = txtUsername.getText();
+					String pwIn = txtPassword.getText();
+					if(unIn == "" ){
+						//|| txtPassword.getText() == ""
+						txtUsername.setText("you clicked");
+						txtPassword.setText("login");
+						
+					}
+					String usernameEnter = unIn;
+					String passwordEnter = pwIn;
+//					txtUsername.setText("this is hel...");
+//					txtPassword.setText("hello");
+					
+						
+				}
+			});
+			btnLogin.setFont(new Font("Constantia", Font.PLAIN, 16));
+			btnLogin.setBounds(161, 176, 110, 43);
+			frmLogin.getContentPane().add(btnLogin);
+		
+		JButton btnClose = new JButton("Close");
+			btnClose.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					System.exit(0);
+				}
+			}); 
+			btnClose.setFont(new Font("Constantia", Font.PLAIN, 16));
+			btnClose.setBounds(298, 176, 110, 43);
+			frmLogin.getContentPane().add(btnClose);
+			
+		JButton btnTempLogin = new JButton("temp login");
+			btnTempLogin.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+						frmLogin.dispose();
+						StartMenu start = new StartMenu();
+						start.setVisible(true);
+				}
+			});
+			btnTempLogin.setBounds(174, 230, 89, 23);
+			frmLogin.getContentPane().add(btnTempLogin);
+	}
+}

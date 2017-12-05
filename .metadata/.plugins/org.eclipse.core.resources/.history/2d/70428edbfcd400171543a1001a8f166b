@@ -1,0 +1,90 @@
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import java.awt.Font;
+import javax.swing.JButton;
+import javax.swing.JTextField;
+
+public class LogInScreen {
+
+	private JFrame frame;
+	private JTextField txtUsername;
+	private JTextField txtPassword;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					LogInScreen window = new LogInScreen();
+					window.frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the application.
+	 */
+	public LogInScreen() {
+		initialize();
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		frame = new JFrame();
+		frame.getContentPane().setFont(new Font("Segoe UI Emoji", Font.PLAIN, 25));
+		frame.setBounds(100, 100, 450, 300);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setLayout(null);
+		
+		JLabel lblNewLabel = new JLabel("Log In");
+		lblNewLabel.setFont(new Font("SimSun", Font.PLAIN, 25));
+		lblNewLabel.setBounds(174, 11, 92, 43);
+		frame.getContentPane().add(lblNewLabel);
+		
+		JLabel lblUsername = new JLabel("Username:");
+		lblUsername.setFont(new Font("Calibri", Font.PLAIN, 18));
+		lblUsername.setBounds(120, 73, 82, 24);
+		frame.getContentPane().add(lblUsername);
+		
+		JLabel lblPassword = new JLabel("Password:");
+		lblPassword.setFont(new Font("Calibri", Font.PLAIN, 18));
+		lblPassword.setBounds(120, 109, 82, 24);
+		frame.getContentPane().add(lblPassword);
+		
+		JButton btnClear = new JButton("Clear");
+		btnClear.setFont(new Font("Constantia", Font.PLAIN, 16));
+		btnClear.setBounds(26, 176, 110, 43);
+		frame.getContentPane().add(btnClear);
+		
+		JButton btnEnter = new JButton("Enter");
+		btnEnter.setFont(new Font("Constantia", Font.PLAIN, 16));
+		btnEnter.setBounds(161, 176, 110, 43);
+		frame.getContentPane().add(btnEnter);
+		
+		JButton btnClose = new JButton("Close");
+		btnClose.setFont(new Font("Constantia", Font.PLAIN, 16));
+		btnClose.setBounds(298, 176, 110, 43);
+		frame.getContentPane().add(btnClose);
+		
+		txtUsername = new JTextField();
+		txtUsername.setFont(new Font("Calibri", Font.PLAIN, 18));
+		txtUsername.setBounds(223, 72, 140, 24);
+		frame.getContentPane().add(txtUsername);
+		txtUsername.setColumns(10);
+		
+		txtPassword = new JTextField();
+		txtPassword.setFont(new Font("Calibri", Font.PLAIN, 18));
+		txtPassword.setColumns(10);
+		txtPassword.setBounds(223, 110, 140, 24);
+		frame.getContentPane().add(txtPassword);
+	}
+}

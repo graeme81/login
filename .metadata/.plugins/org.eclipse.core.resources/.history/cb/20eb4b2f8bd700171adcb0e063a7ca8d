@@ -1,0 +1,63 @@
+package com.work.login;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import java.awt.Font;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+public class ViewUser extends JFrame {
+
+	private JPanel contentPane;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					ViewUser frame = new ViewUser();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public ViewUser() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 450, 300);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JLabel lblViewUsersPage = new JLabel("View Users Page!");
+		lblViewUsersPage.setFont(new Font("Malgun Gothic Semilight", Font.PLAIN, 25));
+		lblViewUsersPage.setBounds(64, 52, 217, 71);
+		contentPane.add(lblViewUsersPage);
+		
+		JButton btnBack = new JButton("Back");
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new StartMenu().setVisible(true);
+				dispose();
+			}
+		});
+		btnBack.setFont(new Font("Rockwell", Font.PLAIN, 18));
+		btnBack.setBounds(335, 227, 89, 23);
+		contentPane.add(btnBack);
+	}
+
+}

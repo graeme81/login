@@ -1,0 +1,62 @@
+package com.work.login;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import java.awt.Font;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+public class NewUser extends JFrame {
+
+	private JPanel contentPane;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					NewUser frame = new NewUser();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public NewUser() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 450, 300);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JLabel lblNewUserPage = new JLabel("New User Page!");
+		lblNewUserPage.setFont(new Font("Tempus Sans ITC", Font.PLAIN, 25));
+		lblNewUserPage.setBounds(75, 68, 286, 71);
+		contentPane.add(lblNewUserPage);
+		
+		JButton btnBack = new JButton("Back");
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				new StartMenu().setVisible(true);
+				dispose();
+			}
+		});
+		btnBack.setFont(new Font("Perpetua", Font.PLAIN, 20));
+		btnBack.setBounds(335, 227, 89, 23);
+		contentPane.add(btnBack);
+	}
+}
