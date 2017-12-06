@@ -74,8 +74,7 @@ public class StartMenu extends JFrame {
 		JButton btnChange = new JButton("Change Password");
 		btnChange.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ChangePassword change = new ChangePassword();
-				change.frmChangePassword.setVisible(true);
+				new ChangePassword().setVisible(true);
 				dispose();
 			}
 		});

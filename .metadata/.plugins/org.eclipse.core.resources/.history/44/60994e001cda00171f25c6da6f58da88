@@ -64,23 +64,12 @@ public class StartMenu extends JFrame {
 		JButton btnDelete = new JButton("Delete User");
 		btnDelete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new DeleteUser().setVisible(true);
+				new DeleteUser().setVisible(true);;
 				dispose();
 			}
 		});
 			btnDelete.setBounds(126, 109, 144, 23);
 			frmStartMenu.add(btnDelete);
-			
-		JButton btnChange = new JButton("Change Password");
-		btnChange.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				ChangePassword change = new ChangePassword();
-				change.frmChangePassword.setVisible(true);
-				dispose();
-			}
-		});
-			btnChange.setBounds(126, 143, 144, 23);
-			frmStartMenu.add(btnChange);
 			
 		JButton btnLogOut = new JButton("Log Out");
 			btnLogOut.addActionListener(new ActionListener() {
@@ -92,8 +81,6 @@ public class StartMenu extends JFrame {
 			});
 			btnLogOut.setBounds(126, 201, 144, 23);
 			frmStartMenu.add(btnLogOut);
-			
-			
 	}
 
 }

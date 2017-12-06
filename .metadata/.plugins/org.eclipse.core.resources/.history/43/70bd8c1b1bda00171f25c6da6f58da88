@@ -1,0 +1,157 @@
+package com.work.login;
+
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.SwingConstants;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+
+import com.work.login.entity.User;
+
+import java.awt.Font;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.util.List;
+import java.awt.event.ActionEvent;
+
+public class ChangePassword extends JFrame{
+
+	private JFrame frmChangePassword;
+	private JTextField txtUsername;
+	private JTextField txtNew;
+	private JTextField txtConfirm;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					ChangePassword window = new ChangePassword();
+					window.frmChangePassword.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the application.
+	 */
+	public ChangePassword() {
+		initialize();
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		frmChangePassword = new JFrame();
+		frmChangePassword.setTitle("Change Password");
+		frmChangePassword.setBounds(100, 100, 450, 300);
+		frmChangePassword.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmChangePassword.getContentPane().setLayout(null);
+		
+		JLabel lblUsername = new JLabel("Username:");
+		lblUsername.setBounds(82, 92, 105, 14);
+		frmChangePassword.getContentPane().add(lblUsername);
+		
+		JLabel lblNewPassword = new JLabel("New Password:");
+		lblNewPassword.setBounds(82, 120, 105, 14);
+		frmChangePassword.getContentPane().add(lblNewPassword);
+		
+		JLabel lblConfimPassword = new JLabel("Confim Password:");
+		lblConfimPassword.setBounds(82, 148, 105, 14);
+		frmChangePassword.getContentPane().add(lblConfimPassword);
+		
+		JLabel lblNewLabechangePasswordl = new JLabel("Change Password");
+		lblNewLabechangePasswordl.setFont(new Font("Tempus Sans ITC", Font.PLAIN, 20));
+		lblNewLabechangePasswordl.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabechangePasswordl.setBounds(10, 11, 414, 40);
+		frmChangePassword.getContentPane().add(lblNewLabechangePasswordl);
+		
+		txtUsername = new JTextField();
+		txtUsername.setBounds(185, 89, 125, 20);
+		frmChangePassword.getContentPane().add(txtUsername);
+		txtUsername.setColumns(10);
+		
+		txtNew = new JTextField();
+		txtNew.setColumns(10);
+		txtNew.setBounds(185, 117, 125, 20);
+		frmChangePassword.getContentPane().add(txtNew);
+		
+		txtConfirm = new JTextField();
+		txtConfirm.setColumns(10);
+		txtConfirm.setBounds(185, 145, 125, 20);
+		frmChangePassword.getContentPane().add(txtConfirm);
+		
+		JButton btnUpdate = new JButton("Update");
+		btnUpdate.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (!(txtNew.getText().equals(txtConfirm.getText()))){
+					JOptionPane.showMessageDialog(null, "New password not confirmed");
+					txtNew.setText("");
+					txtConfirm.setText("");
+				}else{
+					SessionFactory factory = new Configuration()
+							.configure("hibernate.cfg.xml")
+							.addAnnotatedClass(User.class)
+							.buildSessionFactory();
+
+					Session session = factory.getCurrentSession();
+					
+					try{
+						session.beginTransaction();
+						
+						String unIn = txtUsername.getText();
+						
+						String hql = "FROM User WHERE username = '"+ unIn +"'";
+						List<User> users = session.createQuery(hql).list();
+						
+						if (users.size()>0){
+							for(User tempUser :users){
+								hql = "UPDATE User set password = '"+txtNew.getText()+
+										"' WHERE username = '"+txtUsername.getText()+"'";
+								session.createQuery(hql).executeUpdate();
+							}
+							
+							
+							session.createQuery("update Student set email = 'weAreAll@awesome.com'")
+							.executeUpdate();
+							
+							
+							
+						}else{
+							JOptionPane.showMessageDialog(null, "Username not found");
+						}
+						
+					}finally{
+						factory.close();
+					}
+				}
+			}
+		});
+		btnUpdate.setFont(new Font("Tempus Sans ITC", Font.PLAIN, 13));
+		btnUpdate.setBounds(152, 188, 89, 23);
+		frmChangePassword.getContentPane().add(btnUpdate);
+		
+		JButton btnBack = new JButton("Back");
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				new StartMenu().setVisible(true);
+				dispose();
+			}
+		});
+		btnBack.setFont(new Font("Tempus Sans ITC", Font.PLAIN, 13));
+		btnBack.setBounds(335, 227, 89, 23);
+		frmChangePassword.getContentPane().add(btnBack);
+	}
+}
